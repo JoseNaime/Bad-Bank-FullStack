@@ -6,7 +6,6 @@ const Schema = mongoose.Schema;
 const Deposit = require('./deposit');
 const Withdrawal = require('./withdrawal');
 
-
 const UserSchema = new Schema({
     name: {
         type: String,
@@ -35,5 +34,5 @@ const UserSchema = new Schema({
     }
 });
 
-const User = mongoose.model('User', UserSchema);
+const User = mongoose.models.User || mongoose.model('User', UserSchema);
 module.exports = User;
