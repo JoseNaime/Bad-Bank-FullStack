@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {ErrorMessage, Field, Form, Formik} from 'formik';
 import axios from 'axios';
+import Link from 'next/link';
 
 function Login(props) {
     const [error, setError] = useState('');
@@ -60,7 +61,7 @@ function Login(props) {
                 )}
             </Formik>
             <div>
-                <a href="/register">Create an Account</a>
+                <Link href="/register">Create an Account</Link>
             </div>
         </div>
     );
