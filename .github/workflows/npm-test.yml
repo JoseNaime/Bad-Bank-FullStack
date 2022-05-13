@@ -1,5 +1,9 @@
 name: npm test
 on: [ push ]
+
+env:
+  MONGODB_TEST_URI: mongodb+srv://JoseNaime:Lmzqfl11150@bad-bank.2dfm7.mongodb.net/webCollection?retryWrites=true&w=majority
+
 jobs:
   test:
 
@@ -13,12 +17,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Init env vars
-        env:
-          MONGODB_TEST_URI: mongodb+srv://JoseNaime:Lmzqfl11150@bad-bank.2dfm7.mongodb.net/webCollection?retryWrites=true&w=majority
-          run: |
-            echo We can use a variable multiple time: $MONGODB_TEST_URI
-            echo inside a multi-line script: $MONGODB_TEST_URI
       - name: Install dependencies
         working-directory: ./backend
         run: npm install
