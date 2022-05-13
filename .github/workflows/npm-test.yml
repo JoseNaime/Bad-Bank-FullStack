@@ -15,8 +15,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Init env vars
         env:
-            - name: MONGODB_TEST_URI
-                value: mongodb+srv://JoseNaime:Lmzqfl11150@bad-bank.2dfm7.mongodb.net/webCollection?retryWrites=true&w=majority
+          MONGODB_TEST_URI: mongodb+srv://JoseNaime:Lmzqfl11150@bad-bank.2dfm7.mongodb.net/webCollection?retryWrites=true&w=majority
       - name: Install dependencies
         working-directory: ./backend
         run: npm install
