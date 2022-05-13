@@ -5,7 +5,7 @@ const router = express.Router();
 
 router
     .get('/', UserController.getAll)
-    .post('/', UserController.create)
+    .post('/create', UserController.create)
     .get('/:key/:value', UserController.find, UserController.show)
     .put('/deposit/:key/:value', UserController.find, UserController.doDeposit)
     .put('/withdraw/:key/:value', UserController.find, UserController.doWithdraw)
