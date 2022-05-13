@@ -15,5 +15,5 @@ const WithdrawalSchema = new Schema({
     }
 });
 
-const Withdrawal = mongoose.model('Withdrawal', WithdrawalSchema);
+const Withdrawal = mongoose.models.Withdrawal || mongoose.model('Withdrawal', WithdrawalSchema);
 module.exports = Withdrawal;

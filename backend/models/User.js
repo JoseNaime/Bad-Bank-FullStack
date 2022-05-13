@@ -3,8 +3,8 @@
 // create mongoose user model
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const Deposit = require('./deposit');
-const Withdrawal = require('./withdrawal');
+const Deposit = require('./Deposit');
+const Withdrawal = require('./Withdrawal');
 
 const UserSchema = new Schema({
     name: {
