@@ -24,7 +24,7 @@ describe('Test server running', () => {
 describe('Test User Route', () => {
     test('User creation', async () => {
         return await request(app)
-            .post('/api/users')
+            .post('/api/users/create')
             .send({
                 name: 'test',
                 email: 'test@gmail.com',
@@ -35,6 +35,19 @@ describe('Test User Route', () => {
 
             });
 
+    });
+
+    test('Duplicate user in DB', async () => {
+        return await request(app)
+            .post('/api/users/create')
+            .send({
+                name: 'test',
+                email: 'test@gmail.com',
+                password: 'test'
+            })
+            .then((response) => {
+                expect(response.statusCode).toBe(409);
+            });
     });
 });
 
@@ -81,8 +94,7 @@ describe('Test Auth Route', () => {
 });
 
 // Cleans up database between each test
-afterAll( (done) => {
-    User.deleteMany()
-    mongoose.connection.close()
-    done();
+afterAll(async () => {
+    await User.deleteMany()
+    await mongoose.connection.close()
 })
