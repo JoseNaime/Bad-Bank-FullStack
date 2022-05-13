@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(cors());
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_TEST_URI);
+mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on('connected', () => {
     console.log('Mongoose default connection open');
 });
