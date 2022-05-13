@@ -11,9 +11,16 @@ function getAll(req, res) {
 
 function create(req, res) {
     const user = new User(req.body);
-    user.save()
-        .then(user => res.status(201).send({user})
-        ).catch(err => res.status(500).send({err}))
+    // check if user dont exist in db
+    User.findOne({email: user.email})
+        .then((userExist) => {
+            if (userExist) return res.status(409).send({message: 'USER ALREADY EXIST'});
+            // save user
+            user.save()
+                .then(user => res.status(201).send({user}))
+                .catch(err => res.status(500).send({err}))
+        })
+        .catch(err => res.status(500).send({err}))
 }
 
 function show(req, res) {
