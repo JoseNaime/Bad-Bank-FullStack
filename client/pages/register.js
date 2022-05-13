@@ -2,14 +2,12 @@ import React, {useState} from 'react';
 import {ErrorMessage, Field, Form, Formik} from 'formik';
 import axios from 'axios';
 
-function Login(props) {
+function Register(props) {
     const [error, setError] = useState('');
-
-    const handleSubmit = async (values, {setSubmitting}) => {
-        console.log(values);
+    const handleSubmit = (values) => {
         axios({
             method: 'POST',
-            url: process.env.NEXT_PUBLIC_API_URL +'/auth/login',
+            url: process.env.NEXT_PUBLIC_API_URL +'/users',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -17,9 +15,10 @@ function Login(props) {
         }).then(res => {
             const userData = res.data.data;
             const status = res.status;
-
+            console.log(JSON.stringify(res))
             if (status === 200) {
-                alert('Login Successful ' + userData.name);
+                alert('User Created Successfully ' + userData.name);
+                props.history.push('/login');
             }
         }).catch(err => {
             console.log(err.response.data.message);
@@ -29,24 +28,35 @@ function Login(props) {
 
     return (
         <div>
-            <h1>Login</h1>
+            <h1>Create Account</h1>
             <Formik
-                initialValues={{email: '', password: ''}}
+                initialValues={{name: '', email: '', password: ''}}
                 validate={values => {
                     const errors = {};
+                    if (!values.name) {
+                        errors.name = 'Name is Required';
+                    }
                     if (!values.email) {
-                        errors.email = 'Email Required';
+                        errors.email = 'Email is Required';
                     } else if (
                         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
                     ) {
                         errors.email = 'Invalid email address';
                     }
+                    if (!values.password) {
+                        errors.password = 'Password is Required';
+                    } else if (values.password.length < 6) {
+                        errors.password = 'Password must be at least 6 characters';
+                    }
+
                     return errors;
                 }}
                 onSubmit={handleSubmit}
             >
                 {({isSubmitting}) => (
                     <Form>
+                        <Field type="text" name="name" />
+                        <ErrorMessage name="name" component="div" />
                         <Field type="email" name="email" />
                         <ErrorMessage name="email" component="div" />
                         <Field type="password" name="password" />
@@ -58,11 +68,8 @@ function Login(props) {
                     </Form>
                 )}
             </Formik>
-            <div>
-                <a href="/register">Create an Account</a>
-            </div>
         </div>
     );
 }
 
-export default Login;
+export default Register;
