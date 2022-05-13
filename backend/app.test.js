@@ -6,7 +6,7 @@ const User = require("./models/User");
 jest.setTimeout(10000);
 
 beforeAll(async () => {
-    const url = process.env.MONGODB_TEST_URI;
+    const url = process.env.MONGODB_URI;
     await mongoose.connect(url, {useNewUrlParser: true})
 })
 
