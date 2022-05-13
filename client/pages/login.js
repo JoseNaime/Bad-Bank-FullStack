@@ -25,6 +25,7 @@ function Login(props) {
             console.log(err.response.data.message);
             setError(err.response.data.message);
         })
+        setSubmitting(false);
     }
 
     return (

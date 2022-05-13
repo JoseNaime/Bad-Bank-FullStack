@@ -1,29 +1,34 @@
 import React, {useState} from 'react';
 import {ErrorMessage, Field, Form, Formik} from 'formik';
 import axios from 'axios';
+import {useRouter} from "next/router";
 
 function Register(props) {
     const [error, setError] = useState('');
-    const handleSubmit = (values) => {
+    const router = useRouter();
+
+    const handleSubmit = (values, {setSubmitting}) => {
         axios({
             method: 'POST',
-            url: process.env.NEXT_PUBLIC_API_URL +'/users',
+            url: process.env.NEXT_PUBLIC_API_URL +'/users/create',
             headers: {
                 'Content-Type': 'application/json',
             },
             data: values,
         }).then(res => {
-            const userData = res.data.data;
+            const userData = res.data.user;
             const status = res.status;
-            console.log(JSON.stringify(res))
-            if (status === 200) {
+            console.log(JSON.stringify(userData))
+            console.log(status)
+            if (status === 201) {
                 alert('User Created Successfully ' + userData.name);
-                props.history.push('/login');
+                router.push('/login');
             }
         }).catch(err => {
             console.log(err.response.data.message);
             setError(err.response.data.message);
         })
+        setSubmitting(false);
     }
 
     return (
