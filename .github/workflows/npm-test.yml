@@ -5,7 +5,7 @@ env:
   MONGODB_TEST_URI: mongodb+srv://JoseNaime:Lmzqfl11150@bad-bank.2dfm7.mongodb.net/testWebCollection?retryWrites=true&w=majority
 
 jobs:
-  test:
+  Backend Testing:
 
     runs-on: ubuntu-latest
     strategy:
