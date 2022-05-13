@@ -2,10 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app.js",
+    "test": "jest app.test.js"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,8 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "mongoose": "^6.3.3"
+    "jest": "^28.1.0",
+    "mongoose": "^6.3.3",
+    "supertest": "^6.2.3"
   }
 }
