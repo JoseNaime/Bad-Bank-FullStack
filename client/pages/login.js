@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {ErrorMessage, Field, Form, Formik} from 'formik';
 import axios from 'axios';
 import Link from 'next/link';
+import {GlobalContext} from "../components/GlobalProvider";
 
 function Login(props) {
     const [error, setError] = useState('');
+    const {login} = useContext(GlobalContext);
 
     const handleSubmit = async (values, {setSubmitting}) => {
         console.log(values);
@@ -21,6 +23,7 @@ function Login(props) {
 
             if (status === 200) {
                 alert('Login Successful ' + userData.name);
+                login(userData);
             }
         }).catch(err => {
             console.log(err.response.data.message);
