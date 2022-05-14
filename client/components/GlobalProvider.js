@@ -1,6 +1,5 @@
-import {createContext, useReducer} from "react";
+import {createContext, useEffect, useReducer} from "react";
 import Cookies from "js-cookie";
-
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -14,7 +13,7 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 isLogin: false,
-                user: null
+                user: {}
             };
     }
 
@@ -22,7 +21,7 @@ const reducer = (state, action) => {
 
 const initialState = {
     isLoggedIn: false,
-    user: null,
+    user: {},
 }
 
 export const GlobalContext = createContext(initialState);
@@ -35,9 +34,13 @@ export const GlobalProvider = ({children}) => {
             const user = Cookies.get('user');
             return {
                 isLoggedIn: !!user,
-                user: user ? JSON.parse(user) : null,
+                user: user ? JSON.parse(user) : {},
             }
         });
+
+    useEffect(() => {
+        console.log(state)
+    })
 
     function login(user) {
         Cookies.set('user', JSON.stringify(user));
@@ -54,12 +57,30 @@ export const GlobalProvider = ({children}) => {
         });
     }
 
+    function getUserParsed() {
+        const user = Cookies.get('user');
+        if (user) {
+            return JSON.parse(user);
+        } else {
+            return {};
+        }
+    }
+
+    function getUserString() {
+        const user = Cookies.get('user');
+        if (user) {
+            return user;
+        } else {
+            return {};
+        }
+    }
+
     return (
         <GlobalContext.Provider value={{
-            user: state.user,
-            isLoggedIn: state.isLoggedIn,
             login: login,
-            logout: logout
+            logout: logout,
+            getUserParsed: getUserParsed,
+            getUserString: getUserString,
         }}>
             {children}
         </GlobalContext.Provider>

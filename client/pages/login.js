@@ -1,12 +1,21 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {ErrorMessage, Field, Form, Formik} from 'formik';
 import axios from 'axios';
 import Link from 'next/link';
 import {GlobalContext} from "../components/GlobalProvider";
+import {useRouter} from "next/router";
 
 function Login(props) {
     const [error, setError] = useState('');
-    const {login} = useContext(GlobalContext);
+    const {login, getUserString} = useContext(GlobalContext);
+    const user = getUserString();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (user) {
+            router.push('/')
+        }
+    }, [user, router]);
 
     const handleSubmit = async (values, {setSubmitting}) => {
         console.log(values);
@@ -24,6 +33,7 @@ function Login(props) {
             if (status === 200) {
                 alert('Login Successful ' + userData.name);
                 login(userData);
+                router.push('/');
             }
         }).catch(err => {
             console.log(err.response.data.message);

@@ -1,11 +1,20 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {ErrorMessage, Field, Form, Formik} from 'formik';
 import axios from 'axios';
 import {useRouter} from "next/router";
+import {GlobalContext} from "../components/GlobalProvider";
 
 function Register(props) {
     const [error, setError] = useState('');
+    const {getUserString} = useContext(GlobalContext);
+    const user = getUserString();
     const router = useRouter();
+
+    useEffect(() => {
+        if (user) {
+            router.push('/')
+        }
+    }, [user, router]);
 
     const handleSubmit = (values, {setSubmitting}) => {
         axios({
