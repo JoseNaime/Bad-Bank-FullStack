@@ -12,7 +12,7 @@ function Register(props) {
 
     useEffect(() => {
         if (user) {
-            router.push('/')
+            router.push('/');
         }
     }, [user, router]);
 

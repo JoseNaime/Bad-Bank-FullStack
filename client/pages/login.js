@@ -12,7 +12,7 @@ function Login(props) {
     const router = useRouter();
 
     useEffect(() => {
-        if (user) {
+        if (user.name) {
             router.push('/')
         }
     }, [user, router]);

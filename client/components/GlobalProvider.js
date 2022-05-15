@@ -3,13 +3,18 @@ import Cookies from "js-cookie";
 
 const reducer = (state, action) => {
     switch (action.type) {
-        case 'login':
+        case 'SAVE_USER':
+            return {
+                ...state,
+                user: action.payload
+            };
+        case 'LOGIN':
             return {
                 ...state,
                 isLogin: true,
                 user: action.payload
             };
-        case 'logout':
+        case 'LOGOUT':
             return {
                 ...state,
                 isLogin: false,
@@ -57,6 +62,14 @@ export const GlobalProvider = ({children}) => {
         });
     }
 
+    function saveUser(user) {
+        Cookies.set('user', JSON.stringify(user));
+        dispatch({
+            type: 'SAVE_USER',
+            payload: user,
+        });
+    }
+
     function getUserParsed() {
         const user = Cookies.get('user');
         if (user) {
@@ -81,6 +94,7 @@ export const GlobalProvider = ({children}) => {
             logout: logout,
             getUserParsed: getUserParsed,
             getUserString: getUserString,
+            saveUser: saveUser,
         }}>
             {children}
         </GlobalContext.Provider>
