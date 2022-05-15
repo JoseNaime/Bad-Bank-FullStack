@@ -32,11 +32,11 @@ function show(req, res) {
 
 function doWithdraw(req, res) {
     if (req.body.error) return res.status(500).send({error});
-    if (!req.body.users) return res.status(404).send({message: 'User Not Found'});
+    if (!req.body.user) return res.status(404).send({message: 'User Not Found'});
 
     const withdrawal = {amount: req.body.amount, date: new Date()};
 
-    let user = req.body.users[0];
+    let user = req.body.user;
     // Check if user has enough money
     if (user.balance >= withdrawal.amount) {
         // Remove Balance
@@ -49,49 +49,68 @@ function doWithdraw(req, res) {
             return res.status(201).send({user});
         });
     } else {
-        return res.status(400).send({message: 'User does not have enough money'});
+        return res.status(400).send({message: 'User does not have enough balance'});
     }
 }
 
 function doDeposit(req, res) {
     if (req.body.error) return res.status(500).send({error});
-    if (!req.body.users) return res.status(404).send({message: 'User Not Found'});
+    if (!req.body.user) return res.status(404).send({message: 'User Not Found'});
 
     const deposit = {amount: req.body.amount, date: new Date()};
 
-    let user = req.body.users[0];
+    let newUser = req.body.user;
 
     // Add Balance
-    user.balance += req.body.amount;
+    newUser.balance += req.body.amount;
     // Push deposit to user history
-    user.history.deposits.push(deposit);
+    newUser.history.deposits.push(deposit);
 
-    return User.findOneAndUpdate({_id: user._id}, user, (err, user) => {
+    return User.findOneAndUpdate({_id: newUser._id}, newUser, (err, user) => {
         if (err) return res.status(500).send({err});
-        return res.status(201).send({user});
+        return res.status(201).send({newUser});
     });
 }
 
-function find(req, res, next) {
+function findByParam(req, res, next) {
     let query = {};
     if (req.params.key === 'email' || req.params.key === 'id') {
         query[req.params.key] = req.params.value
-        User.find(query).then(users => {
-            if (!users.length) return next();
-            req.body.users = users;
+        User.findOne(query).then(user => {
+            if (!user) return next();
+            req.body.user = user;
             return next();
         }).catch(err => {
             req.body.error = err;
             next();
         })
     } else {
-        req.body.error = "Invalid key, please use 'email' or 'id'";
+        req.body.error = "Invalid params, please use 'email' or 'id'";
+        next();
+    }
+}
+
+function findByBody(req, res, next) {
+    console.log(req.body.email);
+    if (req.body.email) {
+        User.findOne({'email': req.body.email }).then(user => {
+            if (!user) return next();
+            req.body.user = user;
+            console.log(req.body);
+            return next();
+        }).catch(err => {
+            req.body.error = err;
+            next();
+        })
+    } else {
+        req.body.error = "Invalid params, please use 'email' or 'id'";
         next();
     }
 }
 
 module.exports = {
-    find,
+    findByParam,
+    findByBody,
     getAll,
     create,
     doDeposit,

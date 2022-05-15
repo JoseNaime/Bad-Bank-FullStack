@@ -6,9 +6,9 @@ const router = express.Router();
 router
     .get('/', UserController.getAll)
     .post('/create', UserController.create)
-    .get('/:key/:value', UserController.find, UserController.show)
-    .put('/deposit/:key/:value', UserController.find, UserController.doDeposit)
-    .put('/withdraw/:key/:value', UserController.find, UserController.doWithdraw)
+    .get('/:key/:value', UserController.findByParam, UserController.show)
+    .put('/deposit', UserController.findByBody, UserController.doDeposit)
+    .put('/withdraw', UserController.findByBody, UserController.doWithdraw)
 ;
 
 module.exports = router;
