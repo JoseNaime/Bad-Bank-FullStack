@@ -3,6 +3,7 @@ import {useRouter} from "next/router";
 import NavBar from "../components/NavBar";
 import {useContext, useEffect, useState} from "react";
 import {GlobalContext} from "../components/GlobalProvider";
+import CurrentBalance from "../components/CurrentBalance";
 
 export default function Home() {
     const {getUserParsed} = useContext(GlobalContext);
@@ -38,10 +39,7 @@ export default function Home() {
                     </p>
                 </div>
 
-                <div>
-                    <h4>Current Balance</h4>
-                    <h2 className="text-center">${user.balance}</h2>
-                </div>
+                <CurrentBalance user={user}/>
             </main>
         </div>
     )

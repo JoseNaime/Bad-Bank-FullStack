@@ -5,6 +5,7 @@ import {ErrorMessage, Field, Form, Formik} from 'formik';
 import {GlobalContext} from "../components/GlobalProvider";
 import {useRouter} from "next/router";
 import axios from "axios";
+import CurrentBalance from "../components/CurrentBalance";
 
 function Deposit() {
     const {getUserParsed, saveUser} = useContext(GlobalContext);
@@ -38,6 +39,7 @@ function Deposit() {
             if (res.status === 201) {
                 alert("Deposit successful");
                 saveUser(res.data.newUser);
+                setUser(res.data.newUser);
             } else {
                 alert("Deposit failed");
             }
@@ -60,10 +62,24 @@ function Deposit() {
                 <p>
                     Deposit money to your Bad Bank account.
                 </p>
+                <CurrentBalance user={user}/>
                 <Formik
                     initialValues={{
                         amount: '',
                     }}
+                    validate={
+                        values => {
+                            const errors = {};
+                            if (!values.amount) {
+                                errors.amount = 'Required';
+                            } else if (isNaN(values.amount)) {
+                                errors.amount = 'Must be a number';
+                            } else if (values.amount < 0) {
+                                errors.amount = 'Must be positive';
+                            }
+                            return errors;
+                        }
+                    }
                     onSubmit={handleSubmit}
                 >
                     <Form>
