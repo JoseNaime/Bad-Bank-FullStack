@@ -36,17 +36,17 @@ function doWithdraw(req, res) {
 
     const withdrawal = {amount: req.body.amount, date: new Date()};
 
-    let user = req.body.user;
+    let newUser = req.body.user;
     // Check if user has enough money
-    if (user.balance >= withdrawal.amount) {
+    if (newUser.balance >= withdrawal.amount) {
         // Remove Balance
-        user.balance -= withdrawal.amount;
+        newUser.balance -= withdrawal.amount;
         // Push withdrawal to user history
-        user.history.withdrawals.push(withdrawal);
+        newUser.history.withdrawals.push(withdrawal);
 
-        return User.findOneAndUpdate({_id: user._id}, user, (err, user) => {
+        return User.findOneAndUpdate({_id: newUser._id}, newUser, (err, user) => {
             if (err) return res.status(500).send({err});
-            return res.status(201).send({user});
+            return res.status(201).send({newUser});
         });
     } else {
         return res.status(400).send({message: 'User does not have enough balance'});
