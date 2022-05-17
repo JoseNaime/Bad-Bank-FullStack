@@ -57,7 +57,7 @@ function Deposit() {
             </Head>
             <NavBar />
             <main>
-                <div className="card absolute-center">
+                <div className="card">
                     <div className="card-content ">
                         <div className="card-header">
                             <h1>Deposit</h1>

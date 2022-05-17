@@ -47,21 +47,46 @@ input:focus, textarea:focus, select:focus {
   z-index          : 100;
 }
 
+#navbar .container {
+  position : relative;
+  width    : 900px;
+  margin   : auto;
+}
+
 #navbar-links__container {
+  position        : absolute;
+  top             : 50%;
+  left            : 50%;
+  display         : flex;
+  transform       : translate(-50%, -50%);
+  gap             : 20px;
+  justify-content : center;
+  align-items     : center;
+}
+
+#navbar__left {
+  position        : absolute;
+  left            : 0%;
+  top             : 50%;
+  transform       : translateY(-50%);
   display         : flex;
   gap             : 20px;
   justify-content : center;
   align-items     : center;
 }
 
-.navbar__right {
+#navbar__right {
+  position        : absolute;
+  right           : 0;
+  top             : 50%;
+  transform       : translateY(-50%);
   display         : flex;
   gap             : 20px;
   justify-content : center;
   align-items     : center;
 }
 
-.navbar__right p:first-child {
+#navbar__right p:first-child {
   font-weight : bold;
 }
 
@@ -80,7 +105,15 @@ input:focus, textarea:focus, select:focus {
   margin : auto;
 }
 
+#main-card{
+  width: 800px;
+}
+
 .card {
+  position: absolute;
+  top     : 50%;
+  left    : 50%;
+  transform: translate(-50%, -50%);
   border-radius    : 1rem;
   background-color : #FFFFFF;
   box-shadow       : 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
@@ -112,7 +145,8 @@ input:focus, textarea:focus, select:focus {
 .card-balance {
   width      : 100%;
   text-align : right;
-  font-size  : 01rem;
+  font-size  : 1rem;
+  opacity    : 50%;
 }
 .card-balance p {
   font-size : 0.8rem;
@@ -196,4 +230,8 @@ button[type='submit'] {
 
 .field-group:first-child {
   margin-bottom : 10px;
+}
+
+.active-link {
+  color : #4A7EEF;
 }

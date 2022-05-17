@@ -10,7 +10,7 @@ function NavBar(props) {
     const router = useRouter()
 
     useEffect(() => {
-        console.log(_user);
+        console.log(router.pathname);
         if (getUserString()) {
             setUser(_user);
         } else {
@@ -26,20 +26,24 @@ function NavBar(props) {
 
     return (
         <nav id="navbar">
-            <div>
-                <p>Bad Bank</p>
+            <div className="container">
+                <div id="navbar__left">
+                    <p>Bad Bank</p>
+                </div>
+                <div id="navbar-links__container">
+                    <Link href={'/'}><p className={router.pathname === "/" && "active-link "}>Home</p></Link>
+                    <Link href={'/deposit'}><p className={router.pathname === "/deposit" && "active-link "}>Deposit</p>
+                    </Link>
+                    <Link href={'/withdraw'}>
+                        <p className={router.pathname === "/withdraw" && "active-link "}> Withdraw </p></Link>
+                    <Link href={'/history'}><p className={router.pathname === "/history" && "active-link "}>History</p>
+                    </Link>
+                </div>
+                <div id={"navbar__right"}>
+                    <p>{user.name}</p>
+                    <p onClick={handleLogout}>Log Out</p>
+                </div>
             </div>
-            <div id="navbar-links__container">
-                <Link href={'/'}>Home</Link>
-                <Link href={'/deposit'}>Deposit</Link>
-                <Link href={'/withdraw'}>Withdraw</Link>
-                <Link href={'/history'}>History</Link>
-            </div>
-            <div className={"navbar__right"}>
-                <p>{user.name}</p>
-                <p onClick={handleLogout}>Log Out</p>
-            </div>
-
         </nav>
     );
 }

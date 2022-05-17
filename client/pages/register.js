@@ -43,7 +43,7 @@ function Register(props) {
 
     return (
         <div>
-            <div className="card absolute-center">
+            <div className="card">
                 <div className="card-content ">
                     <h1 className="text-center">Create Account</h1>
                     <Formik

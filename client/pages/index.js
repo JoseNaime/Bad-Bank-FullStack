@@ -4,7 +4,6 @@ import NavBar from "../components/NavBar";
 import {useContext, useEffect, useState} from "react";
 import {GlobalContext} from "../components/GlobalProvider";
 import CurrentBalance from "../components/CurrentBalance";
-import Cookies from "js-cookie";
 
 export default function Home() {
     const {getUserParsed, getUserString} = useContext(GlobalContext);
@@ -30,16 +29,20 @@ export default function Home() {
             </Head>
             <NavBar />
             <main>
-                <div>
-                    <h1>Welcome {user.name}</h1>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi atque esse nobis quasi quia
-                        recusandae sequi, sunt tempora. Ad adipisci alias facilis hic incidunt minima nemo praesentium
-                        sit
-                        sunt tempore!
-                    </p>
+                <div id="main-card" className="card">
+                    <div className="card-content">
+                        <h1 className="text-center">Welcome {user.name}, to the Bad Bank</h1>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi atque esse nobis quasi quia
+                            recusandae sequi, sunt tempora. Ad adipisci alias facilis hic incidunt minima nemo
+                            praesentium
+                            sit
+                            sunt tempore!
+                        </p>
+                        <CurrentBalance user={user} />
+                    </div>
                 </div>
-                <CurrentBalance user={user}/>
+
             </main>
         </div>
     )

@@ -46,7 +46,7 @@ function Login(props) {
 
     return (
         <main>
-            <div className="card absolute-center">
+            <div className="card">
                 <div className="card-content ">
                     <h1 className="text-center">Login</h1>
                     <Formik
