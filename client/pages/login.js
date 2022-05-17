@@ -18,7 +18,6 @@ function Login(props) {
     }, [user, router]);
 
     const handleSubmit = async (values, {setSubmitting}) => {
-        console.log(values);
         axios({
             method: 'POST',
             url: process.env.NEXT_PUBLIC_API_URL +'/auth/login',
@@ -36,47 +35,60 @@ function Login(props) {
                 router.push('/');
             }
         }).catch(err => {
-            console.log(err.response.data.message);
-            setError(err.response.data.message);
+            if (err.response.data) {
+                setError(err.response.data.message);
+            } else {
+                setError('Something went wrong');
+            }
         })
         setSubmitting(false);
     }
 
     return (
-        <div>
-            <h1>Login</h1>
-            <Formik
-                initialValues={{email: '', password: ''}}
-                validate={values => {
-                    const errors = {};
-                    if (!values.email) {
-                        errors.email = 'Email Required';
-                    } else if (
-                        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-                    ) {
-                        errors.email = 'Invalid email address';
-                    }
-                    return errors;
-                }}
-                onSubmit={handleSubmit}
-            >
-                {({isSubmitting}) => (
-                    <Form>
-                        <Field type="email" name="email" />
-                        <ErrorMessage name="email" component="div" />
-                        <Field type="password" name="password" />
-                        <ErrorMessage name="password" component="div" />
-                        <button type="submit" disabled={isSubmitting}>
-                            Submit
-                        </button>
-                        <div>{error}</div>
-                    </Form>
-                )}
-            </Formik>
-            <div>
-                <Link href="/register">Create an Account</Link>
+        <main>
+            <div className="card absolute-center">
+                <div className="card-content ">
+                    <h1 className="text-center">Login</h1>
+                    <Formik
+                        initialValues={{email: '', password: ''}}
+                        validate={values => {
+                            const errors = {};
+                            if (!values.email) {
+                                errors.email = 'Email Required';
+                            } else if (
+                                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                            ) {
+                                errors.email = 'Invalid email address';
+                            }
+                            return errors;
+                        }}
+                        onSubmit={handleSubmit}
+                    >
+                        {({isSubmitting}) => (
+                            <Form>
+                                <div className="field-group">
+                                    <label htmlFor="email">Email</label>
+                                    <Field type="email" name="email" className="form-control" />
+                                    <ErrorMessage name="email" component="div" />
+                                </div>
+                                <div className="field-group">
+                                    <label htmlFor="password">Password</label>
+                                    <Field type="password" name="password" className="form-control" />
+                                    <ErrorMessage name="password" component="div" />
+                                </div>
+                                <div className='alert'>{error}</div>
+                                <button type="submit" disabled={isSubmitting}>
+                                    Submit
+                                </button>
+                            </Form>
+                        )}
+                    </Formik>
+                    <div className={"btn-secondary"}>
+                        <Link  href="/register">Create an Account</Link>
+                    </div>
+                </div>
             </div>
-        </div>
+        </main>
     );
 }
 

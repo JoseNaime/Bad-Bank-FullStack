@@ -1,4 +1,4 @@
-import {createContext, useEffect, useReducer} from "react";
+import {createContext, useReducer} from "react";
 import Cookies from "js-cookie";
 
 const reducer = (state, action) => {
@@ -43,10 +43,6 @@ export const GlobalProvider = ({children}) => {
             }
         });
 
-    useEffect(() => {
-        console.log(state)
-    })
-
     function login(user) {
         Cookies.set('user', JSON.stringify(user));
         dispatch({
@@ -84,7 +80,7 @@ export const GlobalProvider = ({children}) => {
         if (user) {
             return user;
         } else {
-            return {};
+            return '';
         }
     }
 

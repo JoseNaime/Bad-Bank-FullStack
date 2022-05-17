@@ -94,7 +94,6 @@ function Withdraw() {
                                         <Field type="number"
                                                name="amount"
                                                className="form-control"
-                                               id="amount"
                                                placeholder="0.00" />
                                     </div>
                                     <ErrorMessage name="amount" component="div" className="alert alert-danger" />

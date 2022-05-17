@@ -1,11 +1,22 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Link from "next/link";
 import {GlobalContext} from "./GlobalProvider";
 import {useRouter} from "next/router";
 
 function NavBar(props) {
-    const {logout} = useContext(GlobalContext)
+    const {getUserParsed, getUserString, logout} = useContext(GlobalContext)
+    const _user = getUserParsed();
+    const [user, setUser] = useState({});
     const router = useRouter()
+
+    useEffect(() => {
+        console.log(_user);
+        if (getUserString()) {
+            setUser(_user);
+        } else {
+            router.push('/login')
+        }
+    }, []);
 
     const handleLogout = () => {
         logout()
@@ -24,7 +35,8 @@ function NavBar(props) {
                 <Link href={'/withdraw'}>Withdraw</Link>
                 <Link href={'/history'}>History</Link>
             </div>
-            <div>
+            <div className={"navbar__right"}>
+                <p>{user.name}</p>
                 <p onClick={handleLogout}>Log Out</p>
             </div>
 

@@ -24,6 +24,15 @@ main {
   margin   : auto;
 }
 
+form {
+  display        : flex;
+  flex-direction : column;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline : none;
+}
+
 #navbar {
   position         : fixed;
   width            : 100%;
@@ -45,6 +54,17 @@ main {
   align-items     : center;
 }
 
+.navbar__right {
+  display         : flex;
+  gap             : 20px;
+  justify-content : center;
+  align-items     : center;
+}
+
+.navbar__right p:first-child {
+  font-weight : bold;
+}
+
 .text-center {
   text-align : center;
 }
@@ -61,6 +81,7 @@ main {
 }
 
 .card {
+  border-radius    : 1rem;
   background-color : #FFFFFF;
   box-shadow       : 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   display          : flex;
@@ -114,10 +135,23 @@ main {
   flex-direction : column;
 }
 
-.form-group label {
-  text-align  : left;
-  color       : dimgray;
-  font-weight : bold;
+input {
+  border        : none;
+  border-bottom : 1px solid #4B4B4B;
+  height        : 35px;
+  padding       : 0 15px;
+  transition    : all 0.3s ease;
+}
+
+input:hover, input:focus {
+  border-bottom : 1px solid #4A7EEF;
+}
+
+.form-group label, .field-group label {
+  text-align    : left;
+  color         : dimgray;
+  font-weight   : normal;
+  margin-bottom : 5px;
 }
 
 button[type='submit'] {
@@ -129,6 +163,7 @@ button[type='submit'] {
   font-size        : 0.8rem;
   font-weight      : normal;
   cursor           : pointer;
+  margin-top       : 20px;
 }
 
 .currency-input-container {
@@ -147,8 +182,18 @@ button[type='submit'] {
   width : 100%;
 }
 
-input {
-  border        : none;
-  border-bottom : 1px solid #00BFFF;
-  height        : 35px;
+.btn-secondary {
+  text-align : right;
+  margin-top : 10px;
+  opacity: 50%;
+}
+
+.field-group {
+  display        : flex;
+  flex-direction : column;
+  width          : 100%;
+}
+
+.field-group:first-child {
+  margin-bottom : 10px;
 }

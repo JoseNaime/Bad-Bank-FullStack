@@ -4,16 +4,17 @@ import NavBar from "../components/NavBar";
 import {useContext, useEffect, useState} from "react";
 import {GlobalContext} from "../components/GlobalProvider";
 import CurrentBalance from "../components/CurrentBalance";
+import Cookies from "js-cookie";
 
 export default function Home() {
-    const {getUserParsed} = useContext(GlobalContext);
+    const {getUserParsed, getUserString} = useContext(GlobalContext);
     const _user = getUserParsed();
     const [user, setUser] = useState({});
     const router = useRouter();
 
     useEffect(() => {
         console.log(_user);
-        if (!_user) {
+        if (!getUserString()) {
             router.push('/login')
         } else {
             setUser(_user);
@@ -38,7 +39,6 @@ export default function Home() {
                         sunt tempore!
                     </p>
                 </div>
-
                 <CurrentBalance user={user}/>
             </main>
         </div>

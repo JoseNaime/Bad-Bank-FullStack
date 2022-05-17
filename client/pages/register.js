@@ -3,6 +3,7 @@ import {ErrorMessage, Field, Form, Formik} from 'formik';
 import axios from 'axios';
 import {useRouter} from "next/router";
 import {GlobalContext} from "../components/GlobalProvider";
+import Link from "next/link";
 
 function Register(props) {
     const [error, setError] = useState('');
@@ -42,46 +43,57 @@ function Register(props) {
 
     return (
         <div>
-            <h1>Create Account</h1>
-            <Formik
-                initialValues={{name: '', email: '', password: ''}}
-                validate={values => {
-                    const errors = {};
-                    if (!values.name) {
-                        errors.name = 'Name is Required';
-                    }
-                    if (!values.email) {
-                        errors.email = 'Email is Required';
-                    } else if (
-                        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-                    ) {
-                        errors.email = 'Invalid email address';
-                    }
-                    if (!values.password) {
-                        errors.password = 'Password is Required';
-                    } else if (values.password.length < 6) {
-                        errors.password = 'Password must be at least 6 characters';
-                    }
+            <div className="card absolute-center">
+                <div className="card-content ">
+                    <h1 className="text-center">Create Account</h1>
+                    <Formik
+                        initialValues={{name: '', email: '', password: ''}}
+                        validate={values => {
+                            const errors = {};
+                            if (!values.name) {
+                                errors.name = 'Name is Required';
+                            }
+                            if (!values.email) {
+                                errors.email = 'Email is Required';
+                            } else if (
+                                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                            ) {
+                                errors.email = 'Invalid email address';
+                            }
+                            if (!values.password) {
+                                errors.password = 'Password is Required';
+                            } else if (values.password.length < 6) {
+                                errors.password = 'Password must be at least 6 characters';
+                            }
 
-                    return errors;
-                }}
-                onSubmit={handleSubmit}
-            >
-                {({isSubmitting}) => (
-                    <Form>
-                        <Field type="text" name="name" />
-                        <ErrorMessage name="name" component="div" />
-                        <Field type="email" name="email" />
-                        <ErrorMessage name="email" component="div" />
-                        <Field type="password" name="password" />
-                        <ErrorMessage name="password" component="div" />
-                        <button type="submit" disabled={isSubmitting}>
-                            Submit
-                        </button>
-                        <div>{error}</div>
-                    </Form>
-                )}
-            </Formik>
+                            return errors;
+                        }}
+                        onSubmit={handleSubmit}
+                    >
+                        {({isSubmitting}) => (
+                            <Form>
+                                <div className="field-group">
+                                    <label htmlFor="email">Email</label>
+                                    <Field type="email" name="email" className="form-control" />
+                                    <ErrorMessage name="email" component="div" />
+                                </div>
+                                <div className="field-group">
+                                    <label htmlFor="password">Password</label>
+                                    <Field type="password" name="password" className="form-control" />
+                                    <ErrorMessage name="password" component="div" />
+                                </div>
+                                <div className='alert'>{error}</div>
+                                <button type="submit" disabled={isSubmitting}>
+                                    Submit
+                                </button>
+                            </Form>
+                        )}
+                    </Formik>
+                    <div className={"btn-secondary"}>
+                        <Link  href="/login">Go to Login</Link>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
