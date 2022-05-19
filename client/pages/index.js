@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import {useRouter} from "next/router";
 import NavBar from "../components/NavBar";
 import {useContext, useEffect, useState} from "react";
 import {GlobalContext} from "../components/GlobalProvider";
@@ -9,13 +8,9 @@ export default function Home() {
     const {getUserParsed, getUserString} = useContext(GlobalContext);
     const _user = getUserParsed();
     const [user, setUser] = useState({});
-    const router = useRouter();
 
     useEffect(() => {
-        console.log(_user);
-        if (!getUserString()) {
-            router.push('/login')
-        } else {
+        if (_user) {
             setUser(_user);
         }
     }, []);

@@ -73,6 +73,11 @@ function Register(props) {
                         {({isSubmitting}) => (
                             <Form>
                                 <div className="field-group">
+                                    <label htmlFor="name">Name</label>
+                                    <Field type="name" name="name" className="form-control" />
+                                    <ErrorMessage name="name" component="div" />
+                                </div>
+                                <div className="field-group">
                                     <label htmlFor="email">Email</label>
                                     <Field type="email" name="email" className="form-control" />
                                     <ErrorMessage name="email" component="div" />

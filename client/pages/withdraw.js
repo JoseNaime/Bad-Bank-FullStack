@@ -13,10 +13,7 @@ function Withdraw() {
     const router = useRouter();
 
     useEffect(() => {
-        console.log(_user);
-        if (!_user) {
-            router.push('/login')
-        } else {
+        if (_user) {
             setUser(_user);
         }
     }, []);

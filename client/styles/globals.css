@@ -235,3 +235,60 @@ button[type='submit'] {
 .active-link {
   color : #4A7EEF;
 }
+
+.history-item {
+  height        : 45px;
+  border-bottom : 1px solid rgba(75, 75, 75, 0.33);
+  display       : flex;
+  align-items   : center;
+}
+
+.history-item hr {
+  border      : none;
+  border-left : 1px solid hsla(200, 10%, 50%, 50%);
+  height      : 100%;
+  margin      : 0;
+  width       : 1px;
+}
+
+.history-container {
+  justify-content : space-between;
+  padding         : 5px;
+  display         : flex;
+  width           : 100%;
+  position        : relative;
+}
+
+.history-header {
+  display : flex;
+  gap     : 10px;
+}
+
+.history-date {
+  font-size : 0.8rem;
+  display   : flex;
+  gap       : 5px;
+  position  : absolute;
+  bottom    : 0;
+  right     : 0;
+  opacity   : 35%
+}
+
+.history-item p {
+  margin : 0;
+}
+.index-container {
+  width    : 20px;
+  position : relative;
+}
+
+.index {
+  text-align : center;
+  opacity    : 50%;
+  font-size  : 0.8rem;
+  position   : absolute;
+  top        : 50%;
+  left       : 50%;
+  transform  : translate(-50%, -50%);
+  
+}

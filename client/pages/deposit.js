@@ -3,20 +3,15 @@ import Head from "next/head";
 import NavBar from "../components/NavBar";
 import {ErrorMessage, Field, Form, Formik} from 'formik';
 import {GlobalContext} from "../components/GlobalProvider";
-import {useRouter} from "next/router";
 import axios from "axios";
 
 function Deposit() {
     const {getUserParsed, saveUser} = useContext(GlobalContext);
     const _user = getUserParsed();
     const [user, setUser] = useState({});
-    const router = useRouter();
 
     useEffect(() => {
-        console.log(_user);
-        if (!_user) {
-            router.push('/login')
-        } else {
+        if (_user) {
             setUser(_user);
         }
     }, []);
