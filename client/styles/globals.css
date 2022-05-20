@@ -125,6 +125,7 @@ input:focus, textarea:focus, select:focus {
 }
 
 .card-content {
+  height  : 100%;
   width   : 100%;
   padding : 50px;
 }
@@ -236,11 +237,32 @@ button[type='submit'] {
   color : #4A7EEF;
 }
 
+.history-resume {
+  overflow-y : scroll;
+}
+
+.history-main-container {
+  height : 100%;
+  width  : 100%;
+}
+
+.history-grid {
+  display : grid;
+}
+
+#history-container {
+  width : 1000px;
+}
+
 .history-item {
   height        : 45px;
   border-bottom : 1px solid rgba(75, 75, 75, 0.33);
   display       : flex;
   align-items   : center;
+}
+
+.history-item p {
+  margin : 0;
 }
 
 .history-item hr {
@@ -249,6 +271,11 @@ button[type='submit'] {
   height      : 100%;
   margin      : 0;
   width       : 1px;
+}
+
+.history-item-container {
+  height     : 150px;
+  overflow-y : scroll;
 }
 
 .history-container {
@@ -274,9 +301,7 @@ button[type='submit'] {
   opacity   : 35%
 }
 
-.history-item p {
-  margin : 0;
-}
+
 .index-container {
   width    : 20px;
   position : relative;
@@ -291,4 +316,19 @@ button[type='submit'] {
   left       : 50%;
   transform  : translate(-50%, -50%);
   
+}
+
+.flex-horizontal {
+  gap             : 30px;
+  display         : flex;
+  flex-direction   : row;
+  justify-content : space-around;
+}
+
+.neg-amount {
+  color : #EF4A4A;
+}
+
+.pos-amount {
+  color : #D9F580;
 }

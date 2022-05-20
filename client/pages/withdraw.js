@@ -34,11 +34,12 @@ function Withdraw() {
             console.log(res);
             if (res.status === 201) {
                 alert("Withdrawal successful");
-                saveUser(res.data.newUser);
-                setUser(res.data.newUser);
+                saveUser(res.data.userUpdated);
+                setUser(res.data.userUpdated);
             } else {
                 alert("Withdawal failed");
             }
+            values.amount = "";
         }).catch(err => {
             console.log(err);
         });

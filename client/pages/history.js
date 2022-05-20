@@ -26,18 +26,27 @@ function History() {
             </Head>
             <NavBar />
             <main>
-                <div className="card">
+                <div id="history-container" className="card">
                     <div className="card-content">
                         {user &&
-                            <div>
+                            <div className="history-grid">
+                                <div className="flex-horizontal">
+                                    <HistoryResume
+                                        className={"history-resume"}
+                                        user={user}
+                                        toResume={"withdrawals"}
+                                        title={"Withdrawals"} />
+                                    <HistoryResume
+                                        className={"history-resume"}
+                                        user={user}
+                                        toResume={"deposits"}
+                                        title={"Deposits"} />
+                                </div>
                                 <HistoryResume
+                                    className={"history-resume"}
                                     user={user}
-                                    toResume={"withdrawals"}
-                                    title={"Withdrawals History"} />
-                                <HistoryResume
-                                    user={user}
-                                    toResume={"deposits"}
-                                    title={"Deposits History"} />
+                                    toResume={"transfers"}
+                                    title={"Transfers"} />
                             </div>
                         }
                     </div>

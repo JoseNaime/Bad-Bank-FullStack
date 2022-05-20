@@ -46,6 +46,7 @@ function Login(props) {
 
     return (
         <main>
+            <h1 className="text-center title"> Bad Bank </h1>
             <div className="card">
                 <div className="card-content ">
                     <h1 className="text-center">Login</h1>

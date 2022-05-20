@@ -43,6 +43,7 @@ function Register(props) {
 
     return (
         <div>
+            <h1 className="text-center title"> Bad Bank </h1>
             <div className="card">
                 <div className="card-content ">
                     <h1 className="text-center">Create Account</h1>

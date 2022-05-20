@@ -32,11 +32,12 @@ function Deposit() {
             console.log(res);
             if (res.status === 201) {
                 alert("Deposit successful");
-                saveUser(res.data.newUser);
-                setUser(res.data.newUser);
+                saveUser(res.data.userUpdated);
+                setUser(res.data.userUpdated);
             } else {
                 alert("Deposit failed");
             }
+            values.amount = "";
         }).catch(err => {
             console.log(err);
         });

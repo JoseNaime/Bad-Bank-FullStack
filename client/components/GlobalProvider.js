@@ -37,10 +37,15 @@ export const GlobalProvider = ({children}) => {
         initialState,
         () => {
             const user = Cookies.get('user');
-            return {
-                isLoggedIn: !!user,
-                user: user ? JSON.parse(user) : {},
+            if (user) {
+                return {
+                    isLoggedIn: true,
+                    user: JSON.parse(user)
+                }
+            } else {
+                return initialState;
             }
+
         });
 
     function login(user) {
