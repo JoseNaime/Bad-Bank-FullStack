@@ -32,19 +32,19 @@ function NavBar(props) {
                 </div>
                 <div id="navbar-links__container">
                     <Link href={'/'}>
-                        <p className={router.pathname === "/" && "active-link "}>Home</p>
+                        <p className={router.pathname === "/" ? "active-link" : ""}>Home</p>
                     </Link>
                     <Link href={'/deposit'}>
-                        <p className={router.pathname === "/deposit" && "active-link "}>Deposit</p>
+                        <p className={router.pathname === "/deposit" ? "active-link" : ""}>Deposit</p>
                     </Link>
                     <Link href={'/withdraw'}>
-                        <p className={router.pathname === "/withdraw" && "active-link "}> Withdraw </p>
+                        <p className={router.pathname === "/withdraw" ? "active-link" : ""}> Withdraw </p>
                     </Link>
                     <Link href={'/transfer'}>
-                        <p className={router.pathname === "/transfer" && "active-link "}>Transfer</p>
+                        <p className={router.pathname === "/transfer" ? "active-link" : ""}>Transfer</p>
                     </Link>
                     <Link href={'/history'}>
-                        <p className={router.pathname === "/history" && "active-link "}>History</p>
+                        <p className={router.pathname === "/history" ? "active-link" : ""}>History</p>
                     </Link>
                 </div>
                 <div id={"navbar__right"}>
