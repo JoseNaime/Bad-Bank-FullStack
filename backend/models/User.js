@@ -26,7 +26,7 @@ const UserSchema = new Schema({
     },
     history: {
         type: Object,
-        default: {deposits: [Deposit], withdrawals: [Withdrawal]},
+        default: {deposits: [], withdrawals: [], transfers: []},
     },
     createdAt: {
         type: Date,

@@ -36,17 +36,17 @@ function doWithdraw(req, res) {
 
     const withdrawal = {amount: req.body.amount, date: new Date()};
 
-    let newUser = req.body.user;
+    let userUpdated = req.body.user;
     // Check if user has enough money
-    if (newUser.balance >= withdrawal.amount) {
+    if (userUpdated.balance >= withdrawal.amount) {
         // Remove Balance
-        newUser.balance -= withdrawal.amount;
+        userUpdated.balance -= withdrawal.amount;
         // Push withdrawal to user history
-        newUser.history.withdrawals.push(withdrawal);
+        userUpdated.history.withdrawals.push(withdrawal);
 
-        return User.findOneAndUpdate({_id: newUser._id}, newUser, (err, user) => {
+        return User.findOneAndUpdate({_id: userUpdated._id}, userUpdated, (err, user) => {
             if (err) return res.status(500).send({err});
-            return res.status(201).send({newUser});
+            return res.status(201).send({userUpdated});
         });
     } else {
         return res.status(400).send({message: 'User does not have enough balance'});
@@ -59,17 +59,62 @@ function doDeposit(req, res) {
 
     const deposit = {amount: req.body.amount, date: new Date()};
 
-    let newUser = req.body.user;
+    let userUpdated = req.body.user;
 
     // Add Balance
-    newUser.balance += req.body.amount;
+    userUpdated.balance += req.body.amount;
     // Push deposit to user history
-    newUser.history.deposits.push(deposit);
+    userUpdated.history.deposits.push(deposit);
 
-    return User.findOneAndUpdate({_id: newUser._id}, newUser, (err, user) => {
+    return User.findOneAndUpdate({_id: userUpdated._id}, userUpdated, (err, user) => {
         if (err) return res.status(500).send({err});
-        return res.status(201).send({newUser});
+        return res.status(201).send({userUpdated});
     });
+}
+
+function doTransfer(req, res) {
+    if (req.body.error) return res.status(500).send({error});
+    if (!req.body.user) return res.status(404).send({message: 'User Not Found'});
+
+    // check if toUser exists
+    return User.findOne({email: req.body.toUser}).clone()
+        .then(toUser => {
+            if (!toUser) return res.status(404).send({message: 'Destination user Not Found'});
+
+            let userUpdated = req.body.user;
+
+            // check if user has enough money
+            if (userUpdated.balance >= req.body.amount) {
+                // Remove Balance
+                userUpdated.balance -= req.body.amount;
+                // Add Balance
+                toUser.balance += req.body.amount;
+                // Push transfer to user history
+                userUpdated.history.transfers.push({
+                    amount: "-" + req.body.amount.toString(),
+                    date: new Date(),
+                    toUser: toUser.email
+                });
+                // Push transfer to toUser history
+                toUser.history.transfers.push({
+                    amount: "+" + req.body.amount.toString(),
+                    date: new Date(),
+                    toUser: req.body.user.email
+                });
+
+                // find and update user and toUser
+                return User.findOneAndUpdate({_id: userUpdated._id}, userUpdated, (err, user) => {
+                    if (err) return res.status(500).send({err});
+                    return User.findOneAndUpdate({_id: toUser._id}, toUser, (err, toUser) => {
+                        if (err) return res.status(500).send({err});
+                        return res.status(201).send({userUpdated, toUser});
+                    });
+                });
+            } else {
+                return res.status(400).send({message: 'User does not have enough balance'});
+            }
+        })
+        .catch(err => res.status(500).send({err}))
 }
 
 function findByParam(req, res, next) {
@@ -93,7 +138,7 @@ function findByParam(req, res, next) {
 function findByBody(req, res, next) {
     console.log(req.body.email);
     if (req.body.email) {
-        User.findOne({'email': req.body.email }).then(user => {
+        User.findOne({'email': req.body.email }).clone().then(user => {
             if (!user) return next();
             req.body.user = user;
             console.log(req.body);
@@ -115,5 +160,6 @@ module.exports = {
     create,
     doDeposit,
     doWithdraw,
+    doTransfer,
     show
 }
