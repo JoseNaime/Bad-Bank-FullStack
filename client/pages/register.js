@@ -46,7 +46,7 @@ function Register(props) {
             <h1 className="text-center title"> Bad Bank </h1>
             <div className="card">
                 <div className="card-content ">
-                    <h1 className="text-center">Create Account</h1>
+                    <h2 className="text-center">Create Account</h2>
                     <Formik
                         initialValues={{name: '', email: '', password: ''}}
                         validate={values => {
@@ -75,17 +75,17 @@ function Register(props) {
                             <Form>
                                 <div className="field-group">
                                     <label htmlFor="name">Name</label>
-                                    <Field type="name" name="name" className="form-control" />
+                                    <Field type="name" name="name" className="form-control" placeholder={"John Doe"}/>
                                     <ErrorMessage name="name" component="div" />
                                 </div>
                                 <div className="field-group">
                                     <label htmlFor="email">Email</label>
-                                    <Field type="email" name="email" className="form-control" />
+                                    <Field type="email" name="email" className="form-control" placeholder={"john.doe@mail.com"}/>
                                     <ErrorMessage name="email" component="div" />
                                 </div>
                                 <div className="field-group">
                                     <label htmlFor="password">Password</label>
-                                    <Field type="password" name="password" className="form-control" />
+                                    <Field type="password" name="password" className="form-control" placeholder={"******"}/>
                                     <ErrorMessage name="password" component="div" />
                                 </div>
                                 <div className='alert'>{error}</div>

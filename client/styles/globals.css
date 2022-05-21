@@ -129,7 +129,7 @@ input:focus, textarea:focus, select:focus {
   width   : 100%;
   padding : 50px;
 }
-.card-content h1 {
+.card-content h1, .card-content h2 {
   margin-top : 0;
 }
 
@@ -139,7 +139,7 @@ input:focus, textarea:focus, select:focus {
   align-items     : center;
 }
 
-.card-header h1 {
+.card-header h1, .card-header h2 {
   margin : 0;
 }
 
@@ -173,7 +173,7 @@ input:focus, textarea:focus, select:focus {
 input {
   border        : none;
   border-bottom : 1px solid #4B4B4B;
-  height        : 35px;
+  height        : 25px;
   padding       : 0 15px;
   transition    : all 0.3s ease;
 }
@@ -227,10 +227,7 @@ button[type='submit'] {
   display        : flex;
   flex-direction : column;
   width          : 100%;
-}
-
-.field-group:first-child {
-  margin-bottom : 10px;
+  margin-bottom  : 20px;
 }
 
 .active-link {
@@ -321,7 +318,7 @@ button[type='submit'] {
 .flex-horizontal {
   gap             : 30px;
   display         : flex;
-  flex-direction   : row;
+  flex-direction  : row;
   justify-content : space-around;
 }
 
@@ -331,4 +328,11 @@ button[type='submit'] {
 
 .pos-amount {
   color : #D9F580;
+}
+
+.title {
+  position  : absolute;
+  top       : 15%;
+  left      : 50%;
+  transform : translate(-50%, -50%);
 }

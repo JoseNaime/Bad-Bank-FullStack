@@ -46,10 +46,10 @@ function Login(props) {
 
     return (
         <main>
-            <h1 className="text-center title"> Bad Bank </h1>
+            <h1 className="text-center title">Bad Bank</h1>
             <div className="card">
                 <div className="card-content ">
-                    <h1 className="text-center">Login</h1>
+                    <h2 className="text-center">Login</h2>
                     <Formik
                         initialValues={{email: '', password: ''}}
                         validate={values => {
@@ -69,12 +69,12 @@ function Login(props) {
                             <Form>
                                 <div className="field-group">
                                     <label htmlFor="email">Email</label>
-                                    <Field type="email" name="email" className="form-control" />
+                                    <Field type="email" name="email" className="form-control" placeholder={"john.doe@mail.com"} />
                                     <ErrorMessage name="email" component="div" />
                                 </div>
                                 <div className="field-group">
                                     <label htmlFor="password">Password</label>
-                                    <Field type="password" name="password" className="form-control" />
+                                    <Field type="password" name="password" className="form-control" placeholder={"******"}/>
                                     <ErrorMessage name="password" component="div" />
                                 </div>
                                 <div className='alert'>{error}</div>
