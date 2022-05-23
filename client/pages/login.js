@@ -70,12 +70,12 @@ function Login(props) {
                                 <div className="field-group">
                                     <label htmlFor="email">Email</label>
                                     <Field type="email" name="email" className="form-control" placeholder={"john.doe@mail.com"} />
-                                    <ErrorMessage name="email" component="div" />
+                                    <ErrorMessage name="email" component="div" className="alert alert-danger"/>
                                 </div>
                                 <div className="field-group">
                                     <label htmlFor="password">Password</label>
                                     <Field type="password" name="password" className="form-control" placeholder={"******"}/>
-                                    <ErrorMessage name="password" component="div" />
+                                    <ErrorMessage name="password" component="div" className="alert alert-danger"/>
                                 </div>
                                 <div className='alert'>{error}</div>
                                 <button type="submit" disabled={isSubmitting}>
