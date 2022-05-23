@@ -16,7 +16,7 @@ function NavBar(props) {
         } else {
             router.push('/login')
         }
-    }, [_user, router]);
+    }, [router]);
 
     const handleLogout = () => {
         logout()

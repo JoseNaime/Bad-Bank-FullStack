@@ -15,7 +15,7 @@ function History() {
         if (_user) {
             setUser(_user);
         }
-    }, [_user]);
+    }, []);
 
     return (
         <div>

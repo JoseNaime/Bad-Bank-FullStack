@@ -13,7 +13,7 @@ function Transfer(props) {
         if (_user) {
             setUser(_user);
         }
-    }, [_user]);
+    }, []);
 
     const handleSubmit = (values, {setSubmitting}) => {
         setSubmitting(true);

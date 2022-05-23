@@ -13,7 +13,7 @@ export default function Home() {
         if (_user) {
             setUser(_user);
         }
-    }, [_user]);
+    }, []);
 
     return (
         <div>
