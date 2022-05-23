@@ -4,8 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "npx cross-env NODE_ENV=development nodemon server.js",
-    "test": "npx cross-env NODE_ENV=testing jest app.test.js"
+    "dev": "npx cross-env NODE_ENV=development nodemon server.js",
+    "test": "npx cross-env NODE_ENV=testing jest app.test.js",
+    "start": "npx cross-env NODE_ENV=development node server.js"
   },
   "keywords": [],
   "author": "",
