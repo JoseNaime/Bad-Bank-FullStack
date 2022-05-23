@@ -108,8 +108,8 @@ function doTransfer(req, res) {
                     return User.findOneAndUpdate({_id: toUser._id}, toUser, (err, toUser) => {
                         if (err) return res.status(500).send({err});
                         return res.status(201).send({userUpdated, toUser});
-                    });
-                });
+                    }).clone();
+                }).clone();
             } else {
                 return res.status(400).send({message: 'User does not have enough balance'});
             }
