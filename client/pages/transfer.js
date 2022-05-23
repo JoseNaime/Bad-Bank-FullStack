@@ -3,6 +3,8 @@ import Head from "next/head";
 import NavBar from "../components/NavBar";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import {GlobalContext} from "../components/GlobalProvider";
+import axios from "axios";
+import {config} from "../config";
 
 function Transfer(props) {
     const {getUserParsed, saveUser} = useContext(GlobalContext);
@@ -15,9 +17,33 @@ function Transfer(props) {
         }
     }, []);
 
-    const handleSubmit = (values, {setSubmitting}) => {
+    const handleSubmit = async (values, {setSubmitting}) => {
         setSubmitting(true);
-        //saveUser(values);
+        axios({
+            method: 'put',
+            url: config.apiUrl + '/users/transfer',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            data: {
+                email: user.email,
+                amount: values.amount,
+                toUser: values.toEmail,
+            }
+        }).then(res => {
+            console.log(res);
+            if (res.status === 201) {
+                alert("Transfer successful");
+                saveUser(res.data.userUpdated);
+                setUser(res.data.userUpdated);
+            } else {
+                alert("Transfer failed");
+            }
+            values.amount = "";
+            values.toEmail = "";
+        }).catch(err => {
+            console.log(err);
+        })
         setSubmitting(false);
     };
 
@@ -44,19 +70,21 @@ function Transfer(props) {
                         </p>
                         <Formik
                             initialValues={{
-                                email: '',
+                                toEmail: '',
                                 amount: '',
                             }}
                             validate={
                                 values => {
                                     const errors = {};
 
-                                    if (!values.email) {
-                                        errors.email = 'Email Required';
+                                    if (!values.toEmail) {
+                                        errors.toEmail = 'Email Required';
                                     } else if (
-                                        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                                        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.toEmail)
                                     ) {
-                                        errors.email = 'Invalid email address';
+                                        errors.toEmail = 'Invalid email address';
+                                    } else if (values.toEmail === user.email) {
+                                        errors.toEmail = 'Cannot transfer to yourself';
                                     }
 
                                     if (!values.amount) {
@@ -76,9 +104,12 @@ function Transfer(props) {
                             <Form>
                                 <div className="form-group">
                                     <div className="field-group">
-                                        <label htmlFor="email">Email to transfer</label>
-                                        <Field type="email" name="email" className="form-control" />
-                                        <ErrorMessage name="email" component="div" className="alert alert-danger" />
+                                        <label htmlFor="toEmail">Email to transfer</label>
+                                        <Field type="email"
+                                               name="toEmail"
+                                               className="form-control"
+                                               placeholder={"john.doe@mail.com"} />
+                                        <ErrorMessage name="toEmail" component="div" className="alert alert-danger" />
                                     </div>
                                     <div className="currency-input-container">
                                         <p>$</p>
@@ -89,7 +120,7 @@ function Transfer(props) {
                                     </div>
                                     <ErrorMessage name="amount" component="div" className="alert alert-danger" />
                                 </div>
-                                <button type="submit" className="btn btn-primary">Do Deposit</button>
+                                <button type="submit" className="btn btn-primary">Do Transfer</button>
                             </Form>
                         </Formik>
                     </div>

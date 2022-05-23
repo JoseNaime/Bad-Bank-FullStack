@@ -59,8 +59,9 @@ function HistoryResume({user, toResume, title, fields}) {
     return (
         <div className="history-main-container">
             <h2 className="text-center">{title}</h2>
+            <hr className="history-divider"/>
             <div className="history-item-container">
-                {elements}
+                {history.slice(0).length > 0 ? elements : <h1 className="history-no-data">No Data</h1>}
             </div>
         </div>
     );

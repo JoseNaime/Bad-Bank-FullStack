@@ -20,7 +20,6 @@ function Withdraw() {
     }, []);
 
     const handleSubmit = async (values, {setSubmitting}) => {
-        console.log("Submitted, account: " + values.amount);
         axios({
             method: 'put',
             url: config.apiUrl + '/users/withdraw',
