@@ -4,6 +4,7 @@ import NavBar from "../components/NavBar";
 import {ErrorMessage, Field, Form, Formik} from 'formik';
 import {GlobalContext} from "../components/GlobalProvider";
 import axios from "axios";
+import {config} from "../config";
 
 function Deposit() {
     const {getUserParsed, saveUser} = useContext(GlobalContext);
@@ -20,7 +21,7 @@ function Deposit() {
         console.log("Submitted, account: " + values.amount);
         axios({
             method: 'put',
-            url: process.env.NEXT_PUBLIC_API_URL + '/users/deposit',
+            url: config.apiUrl + '/users/deposit',
             headers: {
                 'Content-Type': 'application/json',
             },

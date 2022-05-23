@@ -4,6 +4,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import {GlobalContext} from "../components/GlobalProvider";
 import {useRouter} from "next/router";
+import {config} from "../config";
 
 function Login(props) {
     const [error, setError] = useState('');
@@ -20,7 +21,7 @@ function Login(props) {
     const handleSubmit = async (values, {setSubmitting}) => {
         axios({
             method: 'POST',
-            url: process.env.NEXT_PUBLIC_API_URL +'/auth/login',
+            url: config.apiUrl +'/auth/login',
             headers: {
                 'Content-Type': 'application/json',
             },

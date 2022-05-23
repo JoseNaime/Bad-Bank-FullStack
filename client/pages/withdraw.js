@@ -5,6 +5,7 @@ import {GlobalContext} from "../components/GlobalProvider";
 import {useRouter} from "next/router";
 import axios from "axios";
 import {ErrorMessage, Field, Form, Formik} from "formik";
+import {config} from "../config";
 
 function Withdraw() {
     const {getUserParsed, saveUser} = useContext(GlobalContext);
@@ -22,7 +23,7 @@ function Withdraw() {
         console.log("Submitted, account: " + values.amount);
         axios({
             method: 'put',
-            url: process.env.NEXT_PUBLIC_API_URL + '/users/withdraw',
+            url: config.apiUrl + '/users/withdraw',
             headers: {
                 'Content-Type': 'application/json',
             },

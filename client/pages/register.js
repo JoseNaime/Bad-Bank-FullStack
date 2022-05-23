@@ -4,6 +4,7 @@ import axios from 'axios';
 import {useRouter} from "next/router";
 import {GlobalContext} from "../components/GlobalProvider";
 import Link from "next/link";
+import {config} from "../config";
 
 function Register(props) {
     const [error, setError] = useState('');
@@ -20,7 +21,7 @@ function Register(props) {
     const handleSubmit = (values, {setSubmitting}) => {
         axios({
             method: 'POST',
-            url: process.env.NEXT_PUBLIC_API_URL +'/users/create',
+            url: config.apiUrl +'/users/create',
             headers: {
                 'Content-Type': 'application/json',
             },
