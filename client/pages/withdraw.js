@@ -16,7 +16,7 @@ function Withdraw() {
         if (_user) {
             setUser(_user);
         }
-    }, []);
+    }, [_user]);
 
     const handleSubmit = async (values, {setSubmitting}) => {
         console.log("Submitted, account: " + values.amount);

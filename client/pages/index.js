@@ -2,7 +2,6 @@ import Head from 'next/head'
 import NavBar from "../components/NavBar";
 import {useContext, useEffect, useState} from "react";
 import {GlobalContext} from "../components/GlobalProvider";
-import BankImage from "../assets/bank-image.jpg";
 import Image from "next/image";
 
 export default function Home() {
@@ -14,7 +13,7 @@ export default function Home() {
         if (_user) {
             setUser(_user);
         }
-    }, []);
+    }, [_user]);
 
     return (
         <div>
@@ -28,7 +27,7 @@ export default function Home() {
                 <div id="main-card" className="card">
                     <div className="card-content">
                         <h1 className="text-center">Welcome {user.name}!</h1>
-                        <Image src={BankImage} className="home-image" />
+                        <Image src={"/bank-image.jpg"} width={100} height={100} className="home-image" alt="bank Image" />
                         <div>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi atque esse nobis quasi

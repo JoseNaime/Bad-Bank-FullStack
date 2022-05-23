@@ -9,13 +9,12 @@ function HistoryResume({user, toResume, title}) {
     }
 
     useEffect(() => {
-        console.log(user);
         if (user.history) {
             setHistory(user.history[toResume])
         } else {
             setHistory([])
         }
-    }, [user.history]);
+    }, [user, toResume]);
 
     const elements = history.slice(0).reverse().map((item, index) => {
         const date = formatDate(item.date);
