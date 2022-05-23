@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
-function HistoryResume({user, toResume, title}) {
+function HistoryResume({user, toResume, title, fields}) {
     const [history, setHistory] = useState([]);
 
     const formatDate = (date) => {
@@ -41,6 +41,13 @@ function HistoryResume({user, toResume, title}) {
                         <hr />
                         <p className={symbol}>$ {item.amount}</p>
                     </div>
+                    {fields.map((field, index) => {
+                        return (
+                            <div key={index} className="history-field">
+                                <p>{item[field]}</p>
+                            </div>
+                        )
+                    })}
                     <div className="history-date">
                         <p>{date}</p>
                     </div>

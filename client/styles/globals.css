@@ -248,6 +248,18 @@ button[type='submit'] {
   overflow-y : scroll;
 }
 
+.history-field {
+  position        : absolute;
+  top             : 50%;
+  left            : 50%;
+  transform       : translate(-50%, -50%);
+  display         : flex;
+  justify-content : space-between;
+  align-items     : center;
+  margin-bottom   : 10px;
+  opacity         : 50%;
+}
+
 .history-main-container {
   height : 100%;
   width  : 100%;

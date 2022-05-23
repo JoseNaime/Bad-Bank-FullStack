@@ -35,18 +35,18 @@ function History() {
                                         className={"history-resume"}
                                         user={user}
                                         toResume={"withdrawals"}
-                                        title={"Withdrawals"} />
+                                        title={"Withdrawals"} fields={[]}/>
                                     <HistoryResume
                                         className={"history-resume"}
                                         user={user}
                                         toResume={"deposits"}
-                                        title={"Deposits"} />
+                                        title={"Deposits"}  fields={[]}/>
                                 </div>
                                 <HistoryResume
                                     className={"history-resume"}
                                     user={user}
                                     toResume={"transfers"}
-                                    title={"Transfers"} />
+                                    title={"Transfers"}  fields={["toUser"]}/>
                             </div>
                         }
                     </div>
